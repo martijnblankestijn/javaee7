@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<batch-artifacts>
+    <ref id="InverterDataReader" class="nl.ordina.javaee7.batch.InverterDataReader" />
+    <ref id="InverterDataWriter" class="nl.ordina.javaee7.batch.InverterDataWriter" />
+    <ref id="InverterItemProcessor" class="nl.ordina.javaee7.batch.InverterDataItemProcessor" />
+</batch-artifacts>

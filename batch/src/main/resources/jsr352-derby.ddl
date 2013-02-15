@@ -1,0 +1,37 @@
+CREATE TABLE JOBSTATUS (
+  id		BIGINT,
+  obj		BLOB
+);
+
+CREATE TABLE STEPSTATUS(
+  id		VARCHAR(512),
+  obj		BLOB
+);
+
+CREATE TABLE CHECKPOINTDATA(
+  id		VARCHAR(512),
+  obj		BLOB
+);
+
+CREATE TABLE JOBINSTANCEDATA(
+  id		VARCHAR(512),
+  obj		BLOB
+);
+
+CREATE TABLE EXECUTIONINSTANCEDATA(
+  id			VARCHAR(512),
+  createtime	TIMESTAMP,
+  starttime		TIMESTAMP,
+  endtime		TIMESTAMP,
+  updatetime	TIMESTAMP,
+  parameters	BLOB,
+  jobinstanceid	VARCHAR(512),
+  batchstatus		BLOB,
+  exitstatus		BLOB
+  );
+  
+CREATE TABLE STEPEXECUTIONINSTANCEDATA(
+	id			VARCHAR(512),
+	jobexecid	VARCHAR(512),
+	stepexecid	VARCHAR(512)
+);

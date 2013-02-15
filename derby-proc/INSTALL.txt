@@ -1,0 +1,9 @@
+# Om te bouwen
+mvn clean install
+
+# Uploaden van de stored procedure in Java naar de Database
+~/workspaces/javaee7/glassfish3/javadb/bin/ij ij_java_proc.sql
+
+# Definieren van de stored procedure in de Database (koppeling Database - Java code)
+~/workspaces/javaee7/glassfish3/javadb/bin/ij ij_create_proc.sql
+
