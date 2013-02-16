@@ -3,15 +3,14 @@ package nl.ordina.javaee7.batch;
 import javax.batch.annotation.*;
 import java.io.Externalizable;
 import java.lang.invoke.MethodHandles;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
 
-import static java.util.logging.Level.FINE;
-import static java.util.logging.Level.FINER;
-import static java.util.logging.Level.FINEST;
+import static java.util.logging.Level.*;
 
 
 /**
@@ -24,14 +23,26 @@ public class InverterDataReader {
     private AtomicInteger checkpoint;
     private Scanner scanner;
 
+    @BatchProperty
+    private String inverterCsvDirectory;
+
     @Open
     public void open(ExternalizableAtomicInteger checkpoint) throws Exception {
-        Path path = Paths.get("src", "test", "resources", "input", "inverter.csv");
+        if (inverterCsvDirectory == null || inverterCsvDirectory.isEmpty() || inverterCsvDirectory.equals("null")) {
+            throw new IllegalStateException("Directory for the comma-separated-value files is required. ["
+                    + inverterCsvDirectory + "] is not valid.");
+        }
+
+        Path path = Paths.get(inverterCsvDirectory);
+        if (Files.notExists(path)) {
+            throw new IllegalStateException("Path " + path + " does not exist!.");
+        }
+        Path file = path.resolve("JAVA_inverter_1204DT0005_20130216.csv");
         this.checkpoint = (checkpoint == null) ? new AtomicInteger(0) : checkpoint.getInteger();
 
-        LOG.log(FINE, "Opening reader with path {0} for checkpoint {1}", new Object[]{path, this.checkpoint});
+        LOG.log(FINE, "Opening reader with path {0} for checkpoint {1}", new Object[]{file, this.checkpoint});
 
-        scanner = new Scanner(path);
+        scanner = new Scanner(file);
 
     }
 

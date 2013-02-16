@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+        version="2.0">
+    <package>nl.mb.inverter.entity</package>
+    <entity class="InverterData" access="FIELD" metadata-complete="true">
+        <attributes>
+            <id name="id"><generated-value strategy="IDENTITY" /></id>
+            <basic name="serialNumberInverter" />
+            <basic name="timestamp" />
+            <basic name="temperature" />
+            <basic name="vpv" />
+            <basic name="iac" />
+            <basic name="vac" />
+            <basic name="fac" />
+            <basic name="pac" />
+            <basic name="etotal" />
+            <basic name="htotal" />
+            <basic name="mode" />
+            <basic name="etoday" />
+            <basic name="etotalh" />
+            <basic name="htotalh" />
+            <basic name="err_gv" />
+            <basic name="err_gf" />
+            <basic name="err_gz" />
+            <basic name="err_temp" />
+            <basic name="err_pv1" />
+            <basic name="err_gfc1" />
+            <basic name="err_mode" />
+        </attributes>
+    </entity>
+</entity-mappings>

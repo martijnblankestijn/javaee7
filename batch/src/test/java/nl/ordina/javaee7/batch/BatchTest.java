@@ -35,12 +35,11 @@ public class BatchTest {
 
     @Test
     public void test() throws Exception {
-
         LOG.fine("Start up");
+
         JobOperator jobOp = BatchRuntime.getJobOperator();
-        System.out.println("JOB OPERATION: " + jobOp);
         Properties jobParameters = new Properties();
-        jobParameters.put("execution.number", "1");
+        jobParameters.put("inverter-csv-directory", "/home/martijn/workspaces/zonnepanelen/solar-data");
 
         URL jobXMLURL = BatchTest.class.getResource("/inverter-batch.xml");
         Path path = Paths.get(jobXMLURL.toURI());

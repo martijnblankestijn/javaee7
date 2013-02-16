@@ -7,6 +7,7 @@ import java.util.Date;
  * Dumb inverter data holder.
  */
 public class InverterData {
+    public Long id;
     public String serialNumberInverter;
     public Date timestamp;
     public BigDecimal temperature;

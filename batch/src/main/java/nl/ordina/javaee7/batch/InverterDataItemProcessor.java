@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 @ItemProcessor(value = "InverterDataItemProcessor ")
 public class InverterDataItemProcessor {
     private static final Logger LOG = Logger.getLogger(MethodHandles.lookup().lookupClass().getSimpleName());
-    private final int numberOfParts = 22;
+    private final int minimalNumberOfParts = 21;
 
     @ProcessItem
     public InverterData processData(String record) throws Exception {
@@ -53,8 +53,8 @@ public class InverterDataItemProcessor {
     }
 
     private void checkPartsLength(String[] parts) {
-        if (parts.length != numberOfParts) {
-            throw new IllegalArgumentException("Expected " + numberOfParts + ", but got " + parts.length);
+        if (parts.length < minimalNumberOfParts) {
+            throw new IllegalArgumentException("Expected minimum of " + minimalNumberOfParts + ", but got " + parts.length);
         }
     }
 
