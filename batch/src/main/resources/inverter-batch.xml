@@ -6,12 +6,6 @@
                processor="InverterItemProcessor" buffer-size="5"
                checkpoint-policy="item"
                commit-interval="5">
-            <properties>
-                <property name="execution.number" value="#{jobParameters['execution.number']}" target="reader" />
-                <property name="readrecord.fail" value="#{jobParameters['readrecord.fail']}" target="reader" />
-                <property name="app.arraysize" value="#{jobParameters['app.arraysize']}" target="reader,writer" />
-                <property name="app.writepoints" value="#{jobParameters['app.writepoints']}" target="reader,writer" />
-            </properties>
         </chunk>
     </step>
 </job>
