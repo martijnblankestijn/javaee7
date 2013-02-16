@@ -45,7 +45,7 @@ public class InverterDataReader {
     @ReadItem
     public String readItem() throws Exception {
         if(isHeaderline()) {
-            scanner.hasNextLine();
+            LOG.log(FINER, "Headerline : {0} (will be ignored)", scanner.nextLine());
         }
 
         return determineOutput();

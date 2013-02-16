@@ -1,6 +1,8 @@
 package nl.ordina.javaee7.batch;
 
 import com.ibm.batch.container.config.IBatchConfig;
+import org.junit.Before;
+import org.junit.Test;
 
 import javax.batch.operations.JobOperator;
 import javax.batch.runtime.BatchRuntime;
@@ -22,12 +24,17 @@ import java.util.logging.Logger;
 /**
  *
  */
-public class BatchStarter {
-    private static final Logger LOG = Logger.getLogger(BatchStarter.class.getSimpleName());
+public class BatchTest {
+    private static final Logger LOG = Logger.getLogger(BatchTest.class.getSimpleName());
 
-    public static void main(String[] args) throws Exception {
+    @Before
+    public void init() throws Exception {
         createDatabase();
+    }
 
+
+    @Test
+    public void test() throws Exception {
 
         LOG.fine("Start up");
         JobOperator jobOp = BatchRuntime.getJobOperator();
@@ -35,7 +42,7 @@ public class BatchStarter {
         Properties jobParameters = new Properties();
         jobParameters.put("execution.number", "1");
 
-        URL jobXMLURL = BatchStarter.class.getResource("/inverter-batch.xml");
+        URL jobXMLURL = BatchTest.class.getResource("/inverter-batch.xml");
         Path path = Paths.get(jobXMLURL.toURI());
         String jobXml = readContent(path);
         Long execID = jobOp.start(jobXml, jobParameters);
@@ -64,7 +71,7 @@ public class BatchStarter {
 
     private static void createDatabase() throws IOException, ClassNotFoundException, URISyntaxException, SQLException {
         Properties properties = new Properties();
-        properties.load(BatchStarter.class.getResourceAsStream("/META-INF/services/batch-config.properties"));
+        properties.load(BatchTest.class.getResourceAsStream("/META-INF/services/batch-config.properties"));
         Class.forName(properties.getProperty("JDBC_DRIVER"));
         String url = properties.getProperty("JDBC_URL");
         String db_user = properties.getProperty("DB_USER");
