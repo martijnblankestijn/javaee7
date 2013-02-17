@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  */
 @ItemProcessor(value = "InverterDataItemProcessor ")
 public class InverterDataItemProcessor {
-    private static final Logger LOG = Logger.getLogger(MethodHandles.lookup().lookupClass().getSimpleName());
+    private static final Logger LOG = Logger.getLogger(MethodHandles.lookup().lookupClass().getName());
     private final int minimalNumberOfParts = 21;
 
     @ProcessItem

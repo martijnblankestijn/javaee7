@@ -8,6 +8,7 @@ import javax.batch.operations.JobOperator;
 import javax.batch.runtime.BatchRuntime;
 import javax.batch.runtime.JobExecution;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -21,6 +22,9 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
 
+import static junit.framework.Assert.assertNull;
+import static org.junit.Assert.assertEquals;
+
 /**
  *
  */
@@ -29,7 +33,8 @@ public class BatchTest {
 
     @Before
     public void init() throws Exception {
-        createDatabase();
+        createBatchDatabase();
+        createInverterDatabase();
     }
 
 
@@ -53,14 +58,24 @@ public class BatchTest {
         long jobInstanceId = execution.getInstanceId();
         long lastExecutionId = execution.getExecutionId();
 
-        Thread.sleep(1000);
+
+        sleep(2);
+
+        assertNull(execution.getExitStatus());
+        assertEquals("STARTED", execution.getStatus());
+
+       sleep(5);
 
         printJobExecution(execution);
 
-        Thread.sleep(2000);
+        sleep(10);
+        assertEquals("COMPLETED", execution.getExitStatus());
+        assertEquals("COMPLETED", execution.getStatus());
+    }
 
-        printJobExecution(execution);
-        System.exit(0);
+    private void sleep(int seconds) throws InterruptedException {
+        System.out.println("SLEEPING FOR " + seconds + " SECONDS");
+        Thread.sleep(seconds * 1000);
     }
 
     private static void printJobExecution(JobExecution execution) {
@@ -68,17 +83,37 @@ public class BatchTest {
         System.out.println("Status: " + execution.getStatus());
     }
 
-    private static void createDatabase() throws IOException, ClassNotFoundException, URISyntaxException, SQLException {
+    private static void createInverterDatabase() throws IOException, ClassNotFoundException, URISyntaxException, SQLException {
+
+        URI ddlUri = BatchTest.class.getResource("/inverter-data-db.ddl").toURI();
+        // properties gelijk aan persistence.xml
+
+        Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+        String url = "jdbc:derby:target/INVERTERDB;create=true";
+        String db_user = "APP";
+        String db_password = "SECRET";
+        createDatabase(ddlUri, url, db_user, db_password);
+    }
+
+
+    private static void createBatchDatabase() throws IOException, ClassNotFoundException, URISyntaxException, SQLException {
+
+        URI ddlUri = IBatchConfig.class.getResource("/jsr352-derby.ddl").toURI();
+
         Properties properties = new Properties();
         properties.load(BatchTest.class.getResourceAsStream("/META-INF/services/batch-config.properties"));
         Class.forName(properties.getProperty("JDBC_DRIVER"));
         String url = properties.getProperty("JDBC_URL");
         String db_user = properties.getProperty("DB_USER");
         String db_password = properties.getProperty("DB_PASSWORD");
+        createDatabase(ddlUri, url, db_user, db_password);
+    }
+
+    private static void createDatabase(URI ddlUri, String url, String db_user, String db_password) throws SQLException, IOException {
         Connection connection = DriverManager.getConnection(url, db_user, db_password);
 
 
-        Path ddlPath = Paths.get(IBatchConfig.class.getResource("/jsr352-derby.ddl").toURI());
+        Path ddlPath = Paths.get(ddlUri);
         String[] statements = readContent(ddlPath).split(";");
         try {
             for (String statement : statements) {

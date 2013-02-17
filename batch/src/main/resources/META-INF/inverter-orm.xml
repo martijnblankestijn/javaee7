@@ -8,7 +8,9 @@
         <attributes>
             <id name="id"><generated-value strategy="IDENTITY" /></id>
             <basic name="serialNumberInverter" />
-            <basic name="timestamp" />
+            <basic name="timestamp">
+                <temporal>TIMESTAMP</temporal>
+                    </basic>
             <basic name="temperature" />
             <basic name="vpv" />
             <basic name="iac" />

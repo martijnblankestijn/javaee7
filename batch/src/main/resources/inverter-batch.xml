@@ -3,9 +3,9 @@
     <step id="step1">
         <chunk reader="InverterDataReader"
                writer="InverterDataWriter"
-               processor="InverterItemProcessor" buffer-size="5"
+               processor="InverterItemProcessor" buffer-size="100"
                checkpoint-policy="item"
-               commit-interval="5">
+               commit-interval="100">
             <properties>
                 <property name="inverterCsvDirectory" value="#{jobParameters['inverter-csv-directory']}" />
             </properties>

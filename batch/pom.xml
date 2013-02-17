@@ -13,20 +13,30 @@
             <groupId>javax.batch</groupId>
             <artifactId>javax.batch-annotation</artifactId>
             <version>1.0-b03</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.batch</groupId>
             <artifactId>javax.batch-api</artifactId>
             <version>1.0-b03</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject-tck</artifactId>
             <version>1</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Test dependencies -->
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>2.5.0-M7</version>
+            <scope>compile</scope>
+        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -37,27 +47,39 @@
             <groupId>com.ibm.batch</groupId>
             <artifactId>com.ibm.batch-model</artifactId>
             <version>1.0-b03</version>
+           <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.ibm.batch</groupId>
             <artifactId>com.ibm.batch-annotation-processors</artifactId>
             <version>1.0-b03</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.ibm.batch</groupId>
             <artifactId>com.ibm.batch-runtime</artifactId>
             <version>1.0-b03</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derby</artifactId>
             <version>10.1.1.0</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derbynet</artifactId>
             <version>10.1.1.0</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>EclipseLink</id>
+            <url>http://download.eclipse.org/rt/eclipselink/maven.repo</url>
+        </repository>
+    </repositories>
 </project>

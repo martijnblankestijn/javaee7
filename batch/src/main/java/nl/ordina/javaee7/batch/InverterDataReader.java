@@ -18,7 +18,7 @@ import static java.util.logging.Level.*;
  */
 @ItemReader(value = "InverterDataReader")
 public class InverterDataReader {
-    private static final Logger LOG = Logger.getLogger(MethodHandles.lookup().lookupClass().getSimpleName());
+    private static final Logger LOG = Logger.getLogger(MethodHandles.lookup().lookupClass().getName());
 
     private AtomicInteger checkpoint;
     private Scanner scanner;
