@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>nl.ordina.javaee</groupId>
+    <artifactId>websocket</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <packaging>war</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!--
+         See https://maven.java.net/content/groups/public/org/glassfish/tyrus/tyrus-client/
+        -->
+        <tyrus.version>1.0-b12</tyrus.version>
+        <!--
+            See for maven version: https://maven.java.net/content/groups/public/javax/websocket/javax.websocket-api/
+            See url for latest build
+            http://java.net/projects/websocket-spec/sources/source-code-repository/show/tags?rev=261
+        -->
+        <websocket-api.version>1.0-b13</websocket-api.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.websocket</groupId>
+            <artifactId>javax.websocket-api</artifactId>
+            <version>${websocket-api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.tyrus</groupId>
+            <artifactId>tyrus-container-grizzly</artifactId>
+            <version>${tyrus.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.tyrus</groupId>
+            <artifactId>tyrus-server</artifactId>
+            <version>${tyrus.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
