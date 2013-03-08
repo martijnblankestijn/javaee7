@@ -1,7 +1,7 @@
 <html>
 <head>
     <script language="javascript" type="text/javascript">
-        var wsUri = "ws://localhost:8080/websocketsample/inverter/martijn";
+        var wsUri = "ws://" + document.location.host + document.location.pathname + "inverter/martijn";
         var websocket = new WebSocket(wsUri);
         websocket.onopen = function(evt) { onOpen(evt) };
         websocket.onmessage = function(evt) { onMessage(evt) };
@@ -13,6 +13,7 @@
 
         function send_echo() {
             websocket.send(textID.value);
+            console.log("sending text: " + textID.value);
             writeToScreen("SENT: " + textID.value);
         }
 
@@ -40,8 +41,8 @@
 </head>
 <body>
 <div style="text-align: center;">
-    <form action="">
-        <input onclick="send_echo()" value="Press me" type="button">
+    <form action="" >
+        <input onclick="send_echo(); return false;" value="Press me" type="button">
         <input id="textID" name="message" value="Hello WebSocket!" type="text"><br>
     </form>
 </div>
