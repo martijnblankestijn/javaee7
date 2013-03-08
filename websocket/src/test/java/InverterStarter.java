@@ -1,4 +1,4 @@
-import nl.ordina.javaee7.server.InverterDataEndpoint;
+import nl.ordina.javaee7.server.websockets.InverterDataEndpoint;
 import org.glassfish.tyrus.server.Server;
 
 import javax.websocket.DeploymentException;

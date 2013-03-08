@@ -1,4 +1,4 @@
-package nl.ordina.javaee7.server;
+package nl.ordina.javaee7.server.websockets;
 
 import javax.annotation.PostConstruct;
 import javax.websocket.OnClose;

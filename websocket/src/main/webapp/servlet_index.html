@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+</head>
+<body>
+<script src="js/jquery-1.9.1.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#inverter").submit(function (event) {
+            var request = $.ajax({
+                url: "servlet/inverter",
+                type: "get",
+                data: $("#message")
+            });
+            request.done(function (response, textStatus, jqXHR) {
+                $("#output ul").append('<li>' + response + '</li>');
+            });
+            request.fail(function (jqXHR, textStatus, errorThrown) {
+                alert("Error: " + textStatus);
+            });
+            // prevent default posting of form
+            event.preventDefault();
+        });
+    });
+</script>
+
+<form id="inverter">
+
+    <label for="message">Message</label>
+    <input id="message" name="message" type="text" value=""/>
+
+    <input type="submit" value="Send"/>
+
+</form>
+<div id="output">
+    <h1>Responses van de server</h1>
+    <ul>
+    </ul>
+</div>
+</body>
+</html>

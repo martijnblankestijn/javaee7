@@ -1,51 +1,8 @@
 <html>
-<head>
-    <script language="javascript" type="text/javascript">
-        var wsUri = "ws://" + document.location.host + document.location.pathname + "inverter/martijn";
-        var websocket = new WebSocket(wsUri);
-        websocket.onopen = function(evt) { onOpen(evt) };
-        websocket.onmessage = function(evt) { onMessage(evt) };
-        websocket.onerror = function(evt) { onError(evt) };
-
-        function init() {
-            output = document.getElementById("output");
-        }
-
-        function send_echo() {
-            websocket.send(textID.value);
-            console.log("sending text: " + textID.value);
-            writeToScreen("SENT: " + textID.value);
-        }
-
-        function onOpen(evt) {
-            writeToScreen("CONNECTED");
-        }
-
-        function onMessage(evt) {
-            writeToScreen("RECEIVED: " + evt.data);
-        }
-
-        function onError(evt) {
-            writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
-        }
-
-        function writeToScreen(message) {
-            var pre = document.createElement("p");
-            pre.style.wordWrap = "break-word";
-            pre.innerHTML = message;
-            output.appendChild(pre);
-        }
-
-        window.addEventListener("load", init, false);
-    </script>
-</head>
 <body>
-<div style="text-align: center;">
-    <form action="" >
-        <input onclick="send_echo(); return false;" value="Press me" type="button">
-        <input id="textID" name="message" value="Hello WebSocket!" type="text"><br>
-    </form>
-</div>
-<div id="output"></div>
+<ul>
+    <li><a href="servlet_index.html">Servlet</a> </li>
+    <li><a href="websocket_index.html">WebSockets</a> </li>
+</ul>
 </body>
 </html>
