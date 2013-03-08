@@ -34,23 +34,28 @@ public class InverterDataEndpoint {
     }
 
     @OnOpen
-    public void onOpen(Session peer) {
-        log(" Adding peer with id " + peer.getId() + ", aantal open " + peer.getOpenSessions().size());
+    public void onOpen(Session client) {
+        log(" Adding client with id " + client.getId() + ", aantal open " + client.getOpenSessions().size());
 
-        sessions.add(peer);
-
-        log("Added peer with id " + peer.getId() + ", aantal open " + peer.getOpenSessions().size());
+        sessions.add(client);
+        sendMessageOnlyToOthers(client.getId() + " just connected, was tie verstandig:  " + client.isSecure(), client);
+        log("Added client with id " + client.getId() + ", aantal open " + client.getOpenSessions().size());
     }
 
     @OnClose
-    public void onClose(Session peer) {
-        log("Removing peer " + peer);
-        sessions.remove(peer);
+    public void onClose(Session client) {
+        log("Removing client " + client);
+        sessions.remove(client);
+        sendMessageOnlyToOthers(client.getId() + " just left the building", client);
     }
 
     @OnMessage
     public void message(@PathParam("inverterId") String inverterId, String message, Session client) {
         log("Got message from " + client + " for " + inverterId + ": " + message);
+        sendMessageOnlyToOthers(message, client);
+    }
+
+    private void sendMessageOnlyToOthers(String message, Session client) {
         for (Session peer : sessions) {
             // broadcast only to the other clients
             if (peer.equals(client)) {
