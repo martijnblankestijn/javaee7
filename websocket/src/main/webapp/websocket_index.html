@@ -8,27 +8,32 @@
     <script language="javascript" type="text/javascript">
         var contextRoot = window.location.pathname.split('/')[1]
         var wsUri = "ws://" + document.location.host + "/" + contextRoot + "/inverter/martijn";
-        var websocket = new WebSocket(wsUri);
-
-        websocket.onopen = function(evt) {
-            writeToScreen("CONNECTED");
-        };
-
-        websocket.onmessage =  function(evt) {
-            writeToScreen("RECEIVED: " + evt.data);
-        };
-
-        websocket.onerror = function(evt) {
-            writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
-        };
 
         function init() {
             output = document.getElementById("output");
+            wsuriField = document.getElementById("wsuri");
+            wsuriField.value = wsUri;
         }
+
+        function connect() {
+            websocket = new WebSocket(wsuriField.value);
+            document.getElementById("send").style.visibility = "visible";
+            websocket.onopen = function (evt) {
+                writeToScreen("CONNECTED");
+            };
+
+            websocket.onmessage = function (evt) {
+                writeToScreen("RECEIVED: " + evt.data);
+            };
+
+            websocket.onerror = function (evt) {
+                writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+            };
+        }
+
 
         function send_echo() {
             websocket.send(textID.value);
-            console.log("sending text: " + textID.value);
             writeToScreen("SENT: " + textID.value);
         }
 
@@ -43,8 +48,15 @@
     </script>
 </head>
 <body>
-<div style="text-align: center;">
-    <form action="" >
+<div>
+    <form action="">
+        <label for="wsuri">WebsocketUri: </label><input id="wsuri" type="text" size="50" maxlength="100"/>
+        <input type="button" value="CONNECT" onclick="connect(); return false;"/>
+    </form>
+</div>
+<div id="send" style="visibility: hidden">
+    <hr />
+    <form action="">
         <input onclick="send_echo(); return false;" value="Press me" type="button">
         <input id="textID" name="message" value="Hello WebSocket!" type="text"><br>
     </form>

@@ -1,10 +1,7 @@
 package nl.ordina.javaee7.server.websockets;
 
 import javax.annotation.PostConstruct;
-import javax.websocket.OnClose;
-import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
+import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
@@ -38,7 +35,7 @@ public class InverterDataEndpoint {
         log(" Adding client with id " + client.getId() + ", aantal open " + client.getOpenSessions().size());
 
         sessions.add(client);
-        sendMessageOnlyToOthers(client.getId() + " just connected, was tie verstandig:  " + client.isSecure(), client);
+        sendMessageOnlyToOthers(client.getId() + " just connected, secure:  " + client.isSecure(), client);
         log("Added client with id " + client.getId() + ", aantal open " + client.getOpenSessions().size());
     }
 
@@ -53,6 +50,11 @@ public class InverterDataEndpoint {
     public void message(@PathParam("inverterId") String inverterId, String message, Session client) {
         log("Got message from " + client + " for " + inverterId + ": " + message);
         sendMessageOnlyToOthers(message, client);
+    }
+
+    @OnError
+    public void onError(Throwable throwable, Session client) {
+        log("Got error from " + client);
     }
 
     private void sendMessageOnlyToOthers(String message, Session client) {

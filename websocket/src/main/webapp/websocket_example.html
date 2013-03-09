@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+</head>
+<head>
+<script language="javascript" type="text/javascript">
+
+ websocket = new WebSocket("ws://localhost:8080/websocketsample/simple");
+ websocket.onopen = function (evt)    { write("CONNECTED"); };
+ websocket.onmessage = function (evt) { write("RECEIVED: " + evt.data); };
+ websocket.onerror = function (evt)   { write('<span style="color: red;">ERROR:</span> ' + evt.data); };
+
+
+        function init() {
+            output = document.getElementById("output");
+        }
+
+ function send_echo() {
+     websocket.send(textID.value);
+     write("SENT: " + textID.value);
+ }
+        function write(message) {
+            var pre = document.createElement("p");
+            pre.style.wordWrap = "break-word";
+            pre.innerHTML = message;
+            output.appendChild(pre);
+        }
+
+        window.addEventListener("load", init, false);
+    </script>
+</head>
+<body>
+<div id="send">
+    <hr />
+    <form action="">
+        <input id="textID" name="message" value="Go go go websockets" type="text" />
+        <input onclick="send_echo(); return false;" value="Verstuur bericht" type="button" />
+    </form>
+</div>
+<div id="output"></div>
+</body>
+</html>
