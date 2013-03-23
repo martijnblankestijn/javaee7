@@ -2,6 +2,9 @@ package nl.ordina.javaee7.jpa;
 
 import javax.persistence.*;
 
+import static javax.persistence.ParameterMode.IN;
+import static javax.persistence.ParameterMode.OUT;
+
 /**
  *
  */
@@ -10,9 +13,16 @@ import javax.persistence.*;
         @NamedEntityGraph(name = "volledig", includeAllAttributes = true)
 })
 
-@NamedStoredProcedureQuery(name="plus", procedureName="APP.PLUS")
-//        parameters = {@StoredProcedureParameter(name = "", type = , )})
+@NamedStoredProcedureQuery(name="plus", procedureName="JAVAEE7.PLUS" ,
+    parameters = {
+  @StoredProcedureParameter(name = "EERSTE", type = Integer.class, mode = IN),
+  @StoredProcedureParameter(name = "TWEEDE", type = Integer.class, mode = IN),
+  @StoredProcedureParameter(name = "RESULTAAT", type = Integer.class, mode = OUT)
+})
 @Entity
+@Table(indexes = {
+        @Index(name = "land", columnList = "landVanHerkomst", unique = false)
+})
 public class Cursist {
   @Id @GeneratedValue
   private Long id;
@@ -21,6 +31,9 @@ public class Cursist {
 
   @Convert(converter = LandConverter.class)
   private Land landVanHerkomst;
+
+  @ManyToOne
+  Cursus cursus;
 
   protected Cursist() {
   }

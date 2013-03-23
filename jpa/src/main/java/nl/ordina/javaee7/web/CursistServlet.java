@@ -23,16 +23,35 @@ public class CursistServlet extends HttpServlet {
   CursistService service;
 
   @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    System.out.println("GETTING");
-    service.callStoredProcedure();
-    List<Cursist> cursisten2 = service.getLand(maakLand("NL"));
-    // geeft nog een ClassCast
-    service.opslaan(maakCursist("NL", Geslacht.MAN));
-    service.opslaan(maakCursist("DE", Geslacht.VROUW));
-    service.opslaan(maakCursist("BE", Geslacht.ONBEKEND));
+  protected void doGet(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
+    String actie = request.getParameter("actie");
+    if (actie == null) throw new RuntimeException("actie is verplicht");
+    switch (actie) {
+      case "stored":
+        service.callStoredProcedure();
+        break;
+      case "storedNamed":
+        service.callStoredProcedure2();
+        break;
+      case "aanmaken":
+        // geeft nog een ClassCast
+        service.opslaan(maakCursist("NL", Geslacht.MAN));
+        service.opslaan(maakCursist("DE", Geslacht.VROUW));
+        service.opslaan(maakCursist("BE", Geslacht.ONBEKEND));
+        break;
+      case "getConvertedFIeld":
+        print(service.getLand(maakLand("NL")));
+        break;
 
-    List<Cursist> cursisten = service.getAll();
+      case "getAll":
+        print(service.getAll());
+        break;
+
+    }
+
+  }
+
+  private void print(List<Cursist> cursisten) {
     for (Cursist cursist : cursisten) {
       System.out.println(cursist);
     }
