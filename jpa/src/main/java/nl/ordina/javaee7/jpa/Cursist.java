@@ -1,13 +1,17 @@
 package nl.ordina.javaee7.jpa;
 
-import javax.persistence.Convert;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  *
  */
+@NamedEntityGraphs({
+        @NamedEntityGraph(name = "beperkt", attributeNodes = {@NamedAttributeNode(value = "landVanHerkomst")}),
+        @NamedEntityGraph(name = "volledig", includeAllAttributes = true)
+})
+
+@NamedStoredProcedureQuery(name="plus", procedureName="APP.PLUS")
+//        parameters = {@StoredProcedureParameter(name = "", type = , )})
 @Entity
 public class Cursist {
   @Id @GeneratedValue

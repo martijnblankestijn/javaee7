@@ -25,7 +25,8 @@ public class CursistServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     System.out.println("GETTING");
-
+    service.callStoredProcedure();
+    List<Cursist> cursisten2 = service.getLand(maakLand("NL"));
     // geeft nog een ClassCast
     service.opslaan(maakCursist("NL", Geslacht.MAN));
     service.opslaan(maakCursist("DE", Geslacht.VROUW));
