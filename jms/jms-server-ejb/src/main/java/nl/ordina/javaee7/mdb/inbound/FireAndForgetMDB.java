@@ -1,6 +1,5 @@
 package nl.ordina.javaee7.mdb.inbound;
 
-import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -10,11 +9,12 @@ import javax.jms.TextMessage;
 /**
  *
  */
-//@MessageDriven(mappedName="jms/FireAndForgetQueue")
-@MessageDriven(activationConfig =
-  @ActivationConfigProperty
-          (propertyName = "destinationLookup",
-           propertyValue = "jms/FireAndForgetQueue"))
+@MessageDriven(mappedName="jms/FireAndForgetQueue")
+// WERKT NOG NIET DOOR BUG IN GLASSFISH
+//@MessageDriven(activationConfig =
+//  @ActivationConfigProperty
+//          (propertyName = "destinationLookup",
+//           propertyValue = "jms/FireAndForgetQueue"))
 public class FireAndForgetMDB implements MessageListener{
   @Override
   public void onMessage(Message msg) {
