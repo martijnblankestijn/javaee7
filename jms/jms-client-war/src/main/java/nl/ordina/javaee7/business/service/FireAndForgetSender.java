@@ -15,6 +15,7 @@ import javax.jms.Queue;
   @Resource(mappedName = "jms/FireAndForgetQueue")
   Queue queue;
 
+
   public void sendMessage(String content) {
     context.createProducer().send(queue, content);
   }
