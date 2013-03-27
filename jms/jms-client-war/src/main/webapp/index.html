@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<body>
+<h1>Fire and Forget</h1>
+<form action="jms/sendFireAndForget" method="POST">
+    <label for="content">Inhoud</label>
+    <input type="text" id="content" name="content" />
+
+    <input type="submit"/>
+</form>
+
+<h1>Request Reply</h1>
+<form action="jms/requestReply" method="POST">
+    <label for="content">Inhoud</label>
+    <input type="text" id="content2" name="content" />
+
+    <input type="submit"/>
+</form>
+
+<h1>Poisonous messages</h1>
+<form action="jms/poisonousMessages" method="POST">
+    <input type="submit"/>
+</form>
+
+</body>
+</html>

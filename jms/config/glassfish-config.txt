@@ -1,0 +1,7 @@
+# Call script with
+#      ../../glassfish4/glassfish/bin/asadmin multimode --file config/glassfish-config.txt
+create-jms-resource --restype javax.jms.Queue jms/FireAndForgetQueue
+create-jms-resource --restype javax.jms.Queue jms/RequestQueue
+create-jms-resource --restype javax.jms.Queue jms/ReplyQueue
+create-jms-resource --restype javax.jms.Queue jms/RedeliveryCountRequestQueue
+list-jms-resources
