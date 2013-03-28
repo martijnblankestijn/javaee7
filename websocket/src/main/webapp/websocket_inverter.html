@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+</head>
+<head>
+    <script language="javascript" type="text/javascript">
+        var contextRoot = window.location.pathname.split('/')[1]
+        var wsUri = "ws://" + document.location.host + "/" + contextRoot + "/inverters/X12345";
+
+        function init() {
+            output = document.getElementById("output");
+            wsuriField = document.getElementById("wsuri");
+            wsuriField.value = wsUri;
+        }
+
+        function connect() {
+            websocket = new WebSocket(wsuriField.value);
+            document.getElementById("send").style.visibility = "visible";
+            websocket.onopen = function (evt) {
+                writeToScreen("CONNECTED");
+            };
+
+            websocket.onmessage = function (evt) {
+                writeToScreen("RECEIVED: " + evt.data);
+            };
+
+            websocket.onerror = function (evt) {
+                writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+            };
+        }
+
+
+        function send_echo() {
+            websocket.send(textID.value);
+            writeToScreen("SENT: " + textID.value);
+        }
+
+        function writeToScreen(message) {
+            var pre = document.createElement("p");
+            pre.style.wordWrap = "break-word";
+            pre.innerHTML = message;
+            output.appendChild(pre);
+        }
+
+        window.addEventListener("load", init, false);
+    </script>
+</head>
+<body>
+<div>
+    <form action="">
+        <label for="wsuri">WebsocketUri: </label><input id="wsuri" type="text" size="50" maxlength="100"/>
+        <input type="button" value="CONNECT" onclick="connect(); return false;"/>
+    </form>
+</div>
+<div id="send" style="visibility: hidden">
+    <hr />
+    <form action="">
+        <input onclick="send_echo(); return false;" value="Press me" type="button">
+        <input id="textID" name="message" value='{"systemId":"AB","reading": 8 }' type="text"><br>
+    </form>
+</div>
+<div id="output"></div>
+</body>
+</html>
