@@ -2,8 +2,7 @@ package nl.ordina.javaee7.batch;
 
 import nl.mb.inverter.entity.InverterData;
 
-import javax.batch.annotation.ItemProcessor;
-import javax.batch.annotation.ProcessItem;
+import javax.batch.api.chunk.ItemProcessor;
 import java.lang.invoke.MethodHandles;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -14,13 +13,13 @@ import java.util.logging.Logger;
 /**
  *
  */
-@ItemProcessor(value = "InverterDataItemProcessor ")
-public class InverterDataItemProcessor {
+public class InverterDataItemProcessor implements ItemProcessor {
     private static final Logger LOG = Logger.getLogger(MethodHandles.lookup().lookupClass().getName());
     private final int minimalNumberOfParts = 21;
 
-    @ProcessItem
-    public InverterData processData(String record) throws Exception {
+    @Override
+    public InverterData processItem(Object ob) throws Exception {
+      String record = (String) ob;
         if(LOG.isLoggable(Level.FINEST)) {
             LOG.log(Level.FINEST, "Processing {0}", record);
         }
@@ -61,4 +60,5 @@ public class InverterDataItemProcessor {
     private BigDecimal toBigDecimal(String part) {
         return new BigDecimal(part);
     }
+
 }

@@ -19,7 +19,7 @@
                         <property name="eclipselink.deploy-on-startup" value="true"/>
                         <property name="eclipselink.application-location" value="/tmp"/>
 
-                        <property name="eclipselink.logging.level" value="FINEST"/>
+                        <property name="eclipselink.logging.level" value="INFO"/>
                     </properties>
                 </persistence-unit>
             </persistence>

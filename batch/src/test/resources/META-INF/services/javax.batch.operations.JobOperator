@@ -1,2 +1,2 @@
 # De implementatie van de JobOperator (meestal onderdeel van de applicatieserver configuratie)
-com.ibm.batch.container.services.impl.JobOperatorImpl
+com.ibm.jbatch.container.api.impl.JobOperatorImpl
