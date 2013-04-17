@@ -3,28 +3,25 @@
     <listeners>
         <listener ref="GenericJobListener" />
     </listeners>
-    <step id="listCsvFile" next="readFiles">
-        <listeners>
-            <listener ref="StepLoggerListener" />
-        </listeners>
-        <batchlet ref="ListInverterFilesBatchlet">
-            <properties>
-                <property name="inverterCsvDirectory" value="#{jobParameters['inverter-csv-directory']}" />
-            </properties>
-        </batchlet>
-    </step>
+
     <step id="readFiles">
-        <chunk checkpoint-policy="item">
+        <listeners>
+            <listener ref="SkipInvalidRecordProcessListener" />
+            <listener ref="LoggingItemProcessListener" />
+            <listener ref="StepErrorListener" />
+        </listeners>
+        <chunk checkpoint-policy="item" item-count="1000" skip-limit="25">
             <reader ref="InverterDataReader">
                 <properties>
-                    <property name="inverterCsvFile" value="#{partitionPlan['inverterCsvFile']}" />
+                    <property name="inverterCsvFile" value="#{jobParameters['inverter-csv-file']}" />
                 </properties>
             </reader>
             <processor ref="InverterItemProcessor" />
             <writer ref="InverterDataWriter" />
+            <skippable-exception-classes>
+                <include class="nl.ordina.javaee7.batch.InvalidRecordException" />
+                <exclude class="java.io.FileNotFoundException"/>
+            </skippable-exception-classes>
         </chunk>
-        <partition>
-            <mapper ref="PartitionOnFilePartitionMapper" />
-        </partition>
     </step>
 </job>

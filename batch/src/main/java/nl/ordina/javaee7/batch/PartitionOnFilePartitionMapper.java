@@ -26,8 +26,8 @@ public class PartitionOnFilePartitionMapper implements PartitionMapper {
     if(transientUserData == null || !(transientUserData instanceof List)) {
       throw new IllegalStateException("Lijst met bestanden verwachten als transient user data");
     }
-    LOG.log(INFO, "jobContext: Map partitions with transient user data {0}", transientUserData);
     List<String> paths = (List<String>) transientUserData;
+    LOG.log(INFO, "jobContext: Map partitions with transient user data, found {0} files", paths.size());
 
     Properties[] partitionProperties = new Properties[paths.size()];
     for (int i = 0; i < paths.size(); i++) {
@@ -39,7 +39,7 @@ public class PartitionOnFilePartitionMapper implements PartitionMapper {
     partitionPlan.setThreads(2);
     partitionPlan.setPartitions(paths.size());
     partitionPlan.setPartitionProperties(partitionProperties);
-    partitionPlan.setPartitionsOverride(true);
+    partitionPlan.setPartitionsOverride(false);
     return partitionPlan;
   }
 }

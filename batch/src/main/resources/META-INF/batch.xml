@@ -3,8 +3,17 @@
     <ref id="InverterDataReader" class="nl.ordina.javaee7.batch.InverterDataReader" />
     <ref id="InverterDataWriter" class="nl.ordina.javaee7.batch.InverterDataWriter" />
     <ref id="InverterItemProcessor" class="nl.ordina.javaee7.batch.InverterDataItemProcessor" />
+
     <ref id="GenericJobListener" class="nl.ordina.javaee7.batch.GenericJobListener" />
+
     <ref id="ListInverterFilesBatchlet" class="nl.ordina.javaee7.batch.ListInverterFilesBatchlet" />
+
     <ref id="StepLoggerListener" class="nl.ordina.javaee7.batch.StepLoggerListener" />
+    <ref id="StepErrorListener" class="nl.ordina.javaee7.batch.StepErrorListener" />
+    <ref id="SkipInvalidRecordProcessListener" class="nl.ordina.javaee7.batch.SkipInvalidRecordProcessListener"/>
+    <ref id="LoggingItemProcessListener" class="nl.ordina.javaee7.batch.LoggingItemProcessListener"/>
+
     <ref id="PartitionOnFilePartitionMapper" class="nl.ordina.javaee7.batch.PartitionOnFilePartitionMapper" />
+
+    <ref id="FilesAvailableDecider" class="nl.ordina.javaee7.batch.FilesAvailableDecider" />
 </batch-artifacts>
