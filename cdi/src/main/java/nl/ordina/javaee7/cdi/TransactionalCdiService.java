@@ -6,12 +6,12 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import static javax.transaction.Transactional.TxType.MANDATORY;
+import static javax.transaction.Transactional.TxType.REQUIRED;
 
 /**
  *
  */
-@Transactional(value = MANDATORY,
+@Transactional(value = REQUIRED,
         rollbackOn = IllegalArgumentException.class,
         dontRollbackOn = EntityNotFoundException.class)
 public class TransactionalCdiService {
