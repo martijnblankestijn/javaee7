@@ -14,6 +14,10 @@
     <ref id="LoggingItemProcessListener" class="nl.ordina.javaee7.batch.LoggingItemProcessListener"/>
 
     <ref id="PartitionOnFilePartitionMapper" class="nl.ordina.javaee7.batch.PartitionOnFilePartitionMapper" />
+    <ref id="InverterPartitionReducer" class="nl.ordina.javaee7.batch.InverterPartitionReducer" />
+    <ref id="InverterPartitionCollector" class="nl.ordina.javaee7.batch.InverterPartitionCollector" />
+    <ref id="InverterPartitionAnalyzer" class="nl.ordina.javaee7.batch.InverterPartitionAnalyzer" />
+
 
     <ref id="FilesAvailableDecider" class="nl.ordina.javaee7.batch.FilesAvailableDecider" />
 </batch-artifacts>

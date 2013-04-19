@@ -1,7 +1,5 @@
 package nl.ordina.javaee7.batch;
 
-import com.ibm.jbatch.spi.services.IBatchConfig;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -31,14 +29,14 @@ public class DatabaseCreator {
 
   private static void createBatchDatabase() throws IOException, ClassNotFoundException, URISyntaxException, SQLException {
 
-    URI ddlUri = IBatchConfig.class.getResource("/jsr352-derby.ddl").toURI();
+    URI ddlUri = getResourceUri("/jsr352-derby.ddl");
 
     createDatabase(ddlUri, getBatchDatabaseConnection());
   }
 
   public static Connection getBatchDatabaseConnection() throws IOException, ClassNotFoundException, SQLException {
     Properties properties = new Properties();
-    properties.load(BatchMain.class.getResourceAsStream("/META-INF/services/batch-config.properties"));
+    properties.load(DatabaseCreator.class.getResourceAsStream("/META-INF/services/batch-config.properties"));
     Class.forName(properties.getProperty("JDBC_DRIVER"));
     String url = properties.getProperty("JDBC_URL");
     String db_user = properties.getProperty("DB_USER");
@@ -48,9 +46,13 @@ public class DatabaseCreator {
 
   private static void createInverterDatabase() throws IOException, ClassNotFoundException, URISyntaxException, SQLException {
 
-    URI ddlUri = BatchMain.class.getResource("/inverter-data-db.ddl").toURI();
+    URI ddlUri = getResourceUri("/inverter-data-db.ddl");
 
     createDatabase(ddlUri, getInverterDatabaseConnection());
+  }
+
+  private static URI getResourceUri(final String resource) throws URISyntaxException {
+    return DatabaseCreator.class.getResource(resource).toURI();
   }
 
   public static Connection getInverterDatabaseConnection() {

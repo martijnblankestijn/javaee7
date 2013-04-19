@@ -41,6 +41,9 @@
 
         <partition>
             <mapper ref="PartitionOnFilePartitionMapper" />
+            <collector ref="InverterPartitionCollector" />
+            <analyzer ref="InverterPartitionAnalyzer" />
+            <reducer ref="InverterPartitionReducer" />
         </partition>
     </step>
 </job>
