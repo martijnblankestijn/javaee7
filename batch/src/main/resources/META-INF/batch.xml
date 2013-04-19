@@ -19,5 +19,8 @@
     <ref id="InverterPartitionAnalyzer" class="nl.ordina.javaee7.batch.InverterPartitionAnalyzer" />
 
 
-    <ref id="FilesAvailableDecider" class="nl.ordina.javaee7.batch.FilesAvailableDecider" />
+    <ref id="filesAvailableDecider" class="nl.ordina.javaee7.batch.FilesAvailableDecider" />
+
+    <!-- SHould be in the test branch. -->
+    <ref id="PutUserDataInScopeBatchlet" class="nl.ordina.javaee7.batch.PutUserDataInScopeBatchlet" />
 </batch-artifacts>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job id="inverterBatchDecider" xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="1.0">
+
+    <step id="PutUserDataInScopeBatchlet" next="CsvFilesAvailable">
+        <batchlet ref="PutUserDataInScopeBatchlet">
+            <properties>
+                <property name="action" value="#{jobParameters['action']}" />
+            </properties>
+        </batchlet>
+    </step>
+
+    <decision id="CsvFilesAvailable" ref="filesAvailableDecider">
+        <fail on="INVALID_USERDATA" exit-status="INVALID_USERDATA"/>
+        <end on="NO_FILES" exit-status="NO_FILES"/>
+        <end on="FILES_AVAILABLE" exit-status="FILES_AVAILABLE"/>
+    </decision>
+
+</job>
