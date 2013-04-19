@@ -6,6 +6,7 @@ import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -13,8 +14,8 @@ import java.util.Set;
  */
 @ServerEndpoint(value = "/inverters/{inverterId}",
         configurator = InverterServerEndpointConfigurator.class,
-        encoders = InstantEncoder.class,
-        decoders = InstantDecoder.class)
+        encoders = InstantEncoderDecoder.class,
+        decoders = InstantEncoderDecoder.class)
 public class InverterEndpoint {
   // Sessions should static to share with different clients
   private static final Set<Session> sessions = Collections.synchronizedSet(new HashSet<Session>());
@@ -32,11 +33,12 @@ public class InverterEndpoint {
   }
 
   @OnMessage(maxMessageSize = 10000)
-  public void message(@PathParam("inverterId") String inverterId, InverterInstant instant, Session client) {
+  public void message(@PathParam("inverterId") String inverterId, InverterData instant, Session client) {
 //  public void message(@PathParam("inverterId") String inverterId, String instant, Session client) {
     log("Got message from " + client + " for " + inverterId + ": " + instant);
 
-    for (Session peer : sessions) {
+    for (Iterator<Session> it = sessions.iterator(); it.hasNext() ;) {
+      Session peer = it.next();
       if (!client.equals(peer)) {
         try {
           peer.getBasicRemote().sendObject(instant);
@@ -44,7 +46,7 @@ public class InverterEndpoint {
           System.out.println(e.getClass().getSimpleName() + " writing to " + peer + " .... ignoring");
         } catch (IOException | RuntimeException e) {
           System.out.println(e.getClass().getSimpleName() + " writing to " + peer + " remove from sessions");
-          sessions.remove(peer);
+          it.remove();
         }
       }
 

@@ -59,7 +59,7 @@ public class InverterClient {
        }
     };
 
-    session = client.connectToServer(endpoint, ClientEndpointConfig.Builder.create().build(), uri);
+    session = container.connectToServer(endpoint, ClientEndpointConfig.Builder.create().build(), uri);
 
 
 //    session = container.connectToServer(InverterClientEndpoint.class, uri);
