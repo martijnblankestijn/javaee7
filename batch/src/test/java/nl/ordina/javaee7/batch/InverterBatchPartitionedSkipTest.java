@@ -61,6 +61,7 @@ public class InverterBatchPartitionedSkipTest extends AbstractBatchTest {
     String directory = InverterBatchPartitionedSkipTest.class.getResource(relativeDirectory).getFile();
     Properties jobParameters = new Properties();
     jobParameters.put("inverter-csv-directory", directory);
+    jobParameters.put("imported-directory", directory + "/imported");
     return jobParameters;
   }
 

@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job id="inverterBatch" xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="1.0">
+    <!--
+        Proces flow:
+
+        1) Determine existence of system
+           Determine existence of system with the specified id in the job parameters, quit if system does not exist.
+        2) List all csv-files
+           List all csv-files in the specified directory in the job parameters,
+             error in case the directory is not valid
+             quit if no files are available for processing
+        3) Process all listed csv-files in multiple partitions, per file
+             a) process all records in the file
+                invalid records will be skipped and logged to separate file (TODO)
+             b) processed files will be moved to specfified directory in the job parameters (TODO)
+
+
+
+       -->
     <listeners>
         <listener ref="GenericJobListener" />
     </listeners>
@@ -22,7 +39,7 @@
             <next on="FILES_AVAILABLE" to="processFiles" />
         </decision>
 
-        <step id="processFiles" allow-start-if-complete="false">
+        <step id="processFiles" allow-start-if-complete="false" next="moveFiles">
             <listeners>
                 <listener ref="StepErrorListener" />
             </listeners>
@@ -48,7 +65,14 @@
                 <reducer ref="InverterPartitionReducer" />
             </partition>
 
-            <end on="COMPLETED" exit-status="FILES_PROCESSED" />
+        </step>
+        <step id="moveFiles">
+            <batchlet ref="MoveInverterFilesBatchlet">
+                <properties>
+                    <property name="importedDirectory" value="#{jobParameters['imported-directory']}" />
+                </properties>
+            </batchlet>
+            <end on="OK" exit-status="FILES_PROCESSED" />
         </step>
     </flow>
 </job>

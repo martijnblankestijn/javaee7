@@ -17,6 +17,7 @@
     <ref id="InverterPartitionReducer" class="nl.ordina.javaee7.batch.InverterPartitionReducer" />
     <ref id="InverterPartitionCollector" class="nl.ordina.javaee7.batch.InverterPartitionCollector" />
     <ref id="InverterPartitionAnalyzer" class="nl.ordina.javaee7.batch.InverterPartitionAnalyzer" />
+    <ref id="MoveInverterFilesBatchlet" class="nl.ordina.javaee7.batch.MoveInverterFilesBatchlet" />
 
 
     <ref id="filesAvailableDecider" class="nl.ordina.javaee7.batch.FilesAvailableDecider" />
