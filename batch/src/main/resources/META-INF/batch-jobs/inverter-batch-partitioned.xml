@@ -42,6 +42,12 @@
         <step id="processFiles" allow-start-if-complete="false" next="moveFiles">
             <listeners>
                 <listener ref="StepErrorListener" />
+                <listener ref="InvalidRecordListener">
+                    <properties>
+                        <property name="invalidRecordDirectory"
+                                  value="#{jobParameters['inverter-invalid-record-directory']}" />
+                    </properties>
+                </listener>
             </listeners>
             <chunk checkpoint-policy="item" item-count="1000" skip-limit="25">
                 <reader ref="InverterDataReader">

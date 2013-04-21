@@ -7,6 +7,10 @@ import javax.batch.operations.JobOperator;
 import javax.batch.runtime.BatchRuntime;
 import javax.batch.runtime.BatchStatus;
 import javax.batch.runtime.JobExecution;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,12 +26,25 @@ public class InverterBatchPartitionedSkipTest extends AbstractBatchTest {
   private static final int AANTAL_GELDIGE_RECORDS = 14;
 
   @Test
-  public void testOngeldigeRecordsOvergeslagen() throws SQLException {
+  public void testOngeldigeRecordsOvergeslagen() throws SQLException, IOException {
     Connection connection = DatabaseCreator.getInverterDatabaseConnection();
     long aantal = queryAantalRecords(connection);
 
-    Properties jobParameters = createJobParametersWithDirectory("/input/invalidrecords");
 
+
+    Path path = Paths.get(InverterBatchPartitionedSkipTest.class.getResource("/input/invalidrecords").getFile());
+    Path target = path.getParent().resolve("test");
+    for (Path fileToBeDeleted : Files.newDirectoryStream(target)) {
+      if(Files.isRegularFile(fileToBeDeleted)) {
+        Files.delete(fileToBeDeleted);
+      }
+    }
+
+    for (Path targetPath : Files.newDirectoryStream(path)) {
+      Files.copy(targetPath, target.resolve(targetPath.getFileName()));
+    }
+
+    Properties jobParameters = createJobParametersWithDirectory("/input/test");
     JobExecution execution = startAndGetJobExecution(jobParameters);
 
     sleep(12);
@@ -62,6 +79,7 @@ public class InverterBatchPartitionedSkipTest extends AbstractBatchTest {
     Properties jobParameters = new Properties();
     jobParameters.put("inverter-csv-directory", directory);
     jobParameters.put("imported-directory", directory + "/imported");
+    jobParameters.put("inverter-invalid-record-directory", directory + "/invalid");
     return jobParameters;
   }
 

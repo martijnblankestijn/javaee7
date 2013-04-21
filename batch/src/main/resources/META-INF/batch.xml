@@ -21,6 +21,7 @@
 
 
     <ref id="filesAvailableDecider" class="nl.ordina.javaee7.batch.FilesAvailableDecider" />
+    <ref id="InvalidRecordListener" class="nl.ordina.javaee7.batch.InvalidRecordListener" />
 
     <!-- SHould be in the test branch. -->
     <ref id="PutUserDataInScopeBatchlet" class="nl.ordina.javaee7.batch.PutUserDataInScopeBatchlet" />

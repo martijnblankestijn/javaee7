@@ -27,7 +27,7 @@ public class InverterDataItemProcessor implements ItemProcessor {
     String[] parts = record.split(",");
 
     if (parts.length < minimalNumberOfParts) {
-      throw new InvalidRecordException("Expected minimum of " + minimalNumberOfParts + " parts, but got " + parts.length + "parts in record [" + record + "]");
+      throw new InvalidRecordException("Expected minimum of " + minimalNumberOfParts + " parts, but got " + parts.length + " parts in record [" + record + "]");
     }
 
     InverterData data = new InverterData();
