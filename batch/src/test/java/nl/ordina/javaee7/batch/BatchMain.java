@@ -13,26 +13,24 @@ import static org.junit.Assert.assertEquals;
 /**
  *
  */
-public class BatchMain extends AbstractBatchTest {
+public class BatchMain{
   private static final Logger LOG = Logger.getLogger(BatchMain.class.getSimpleName());
 
-
-//  @Test
-  public void test() throws Exception {
+  public static void main(String[] args) throws Exception {
     LOG.fine("Start up");
 
     Properties jobParameters = new Properties();
-    jobParameters.put("inverter-csv-directory", "/home/martijn/workspaces/zonnepanelen/testdata");
+    jobParameters.put("inverter-csv-directory", "/home/martijn/workspaces/zonnepanelen/testdata/import/input");
+    jobParameters.put("imported-directory", "/home/martijn/workspaces/zonnepanelen/testdata/import/imported");
+
 
     JobOperator jobOp = BatchRuntime.getJobOperator();
 
-    Long execID = jobOp.start("inverter-batch", jobParameters);
+    Long execID = jobOp.start("inverter-batch-partioned", jobParameters);
 
     JobExecution execution = jobOp.getJobExecution(execID);
 
-    printJobExecution(execution);
-
-    sleep(600);
+    Thread.sleep(60000);
     assertEquals("COMPLETED", execution.getExitStatus());
   }
 
