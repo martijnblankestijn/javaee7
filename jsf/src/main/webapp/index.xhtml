@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"  >
+    <head jsf:id="head">
+        <title>Pass Through attributes - HTML5 friendly markup</title>
+        <link jsf:name="bootstrap.css" rel="stylesheet" type="text/css" />
+        <link jsf:name="custom.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body jsf:id="body">
+        <h1>HTML5 friendly markup</h1>
+        
+        <form jsf:id="introduction" jsf:prependId="false">
+            <h2>Please introduce yourself</h2>
+            <fieldset>
+                <label jsf:for="firstName">First name:</label>
+                <input jsf:id="firstName" type="text" jsf:value="#{person.firstName}" required="true" placeholder="Please type your first name"/>
+                
+                <label jsf:for="familyName">Family name:</label>
+                <input jsf:id="familyName" type="text" jsf:value="#{person.familyName}" required="true" placeholder="Please type your family name"/>
+                
+                <label jsf:for="email">E-mail:</label>
+                <input jsf:id="email" type="email" jsf:value="#{person.email}" required="true" placeholder="Please type your email adres"/>
+            </fieldset>
+            
+            <button jsf:action="#{person.sayHello()}" class="btn btn-large btn-primary">Say my name, say my name!</button>
+        </form>
+        
+         <h2 class="#{person.greetingsClass}" id="greeting">#{person.greeting}</h2>
+        
+    </body>
+</html>
+
