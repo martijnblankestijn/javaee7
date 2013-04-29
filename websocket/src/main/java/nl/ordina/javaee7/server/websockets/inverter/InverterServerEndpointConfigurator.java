@@ -37,12 +37,6 @@ public class InverterServerEndpointConfigurator extends ServerEndpointConfig.Con
   }
 
   @Override
-  public boolean matchesURI(String path, URI requestUri, Map<String, String> templateExpansion) {
-    print("matchesURI: " + path + ", uri: " + requestUri + ", templateExpansion: " + templateExpansion);
-    return super.matchesURI(path, requestUri, templateExpansion);
-  }
-
-  @Override
   public void modifyHandshake(ServerEndpointConfig sec, HandshakeRequest request, HandshakeResponse response) {
     print("modifyHandshake");
     super.modifyHandshake(sec, request, response);    

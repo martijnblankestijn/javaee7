@@ -12,20 +12,26 @@
         <!--
          See https://maven.java.net/content/groups/public/org/glassfish/tyrus/tyrus-client/
         -->
-        <tyrus.version>1.0-b14</tyrus.version>
+        <tyrus.version>1.0-rc3</tyrus.version>
         <!--
             See for maven version: https://maven.java.net/content/groups/public/javax/websocket/javax.websocket-api/
             See url for latest build
             http://java.net/projects/websocket-spec/sources/source-code-repository/show/tags?rev=261
         -->
-        <websocket-api.version>1.0-rc2</websocket-api.version>
+        <websocket-api.version>1.0-rc5</websocket-api.version>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>Java EE 7</id>
+            <url>https://maven.java.net/content/groups/promoted/</url>
+        </repository>
+    </repositories>
     <dependencies>
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
-            <version>7.0-b81</version>
+            <version>7.0-b85</version>
             <scope>provided</scope>
         </dependency>
 
@@ -48,11 +54,20 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>6.0</version>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.0</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
