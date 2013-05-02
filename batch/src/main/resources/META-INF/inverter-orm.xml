@@ -7,7 +7,6 @@
     <entity class="InverterData" access="FIELD" metadata-complete="true">
         <attributes>
             <id name="id"><generated-value strategy="IDENTITY" /></id>
-            <basic name="serialNumberInverter" />
             <basic name="timestamp">
                 <temporal>TIMESTAMP</temporal>
                     </basic>
@@ -30,6 +29,7 @@
             <basic name="err_pv1" />
             <basic name="err_gfc1" />
             <basic name="err_mode" />
+            <transient name="serialNumberInverter" />
         </attributes>
     </entity>
 </entity-mappings>
