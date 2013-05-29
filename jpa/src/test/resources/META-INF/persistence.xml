@@ -4,6 +4,7 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
     <persistence-unit name="cursus" transaction-type="RESOURCE_LOCAL">
         <class>nl.ordina.javaee7.jpa.Cursist</class>
+        <class>nl.ordina.javaee7.jpa.Cursus</class>
         <properties>
             <!-- Standaard properties uit JPA 2.0 -->
             <property name="javax.persistence.jdbc.url" value="jdbc:derby:target/INVERTERDB;create=true"/>
@@ -12,16 +13,15 @@
             <property name="javax.persistence.jdbc.user" value="APP"/>
 
             <!-- Nieuwe properties uit JPA 2.1 -->
-            <property name="javax.persistence.schema-generation-action" value="drop-and-create"/>
-            <property name="javax.persistence.schema-generation-target" value="scripts"/>
-            <property name="javax.persistence.ddl-create-script-target" value="create_ddl.sql"/>
-            <property name="javax.persistence.ddl-drop-script-target" value="drop_ddl.sql"/>
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create" />
+            <property name="javax.persistence.schema-generation.scripts.action" value="drop-and-create" />
+            <property name="javax.persistence.schema-generation.create-source" value="metadata" />
 
-            <property name="eclipselink.deploy-on-startup" value="true"/>
+            <property name="javax.persistence.schema-generation.scripts.create-target" value="target/create_ddl.sql"/>
+            <property name="javax.persistence.schema-generation.scripts.drop-target" value="target/drop_ddl.sql"/>
+
             <property name="eclipselink.logging.level" value="FINE"/>
             <property name="eclipselink.logging.parameters" value="true"/>
-
-            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
         </properties>
     </persistence-unit>
 </persistence>

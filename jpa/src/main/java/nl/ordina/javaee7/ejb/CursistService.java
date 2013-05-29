@@ -27,7 +27,7 @@ public class CursistService {
   }
 
   public List<Cursist> getLand(Land land) {
-    EntityGraph<Object> entityGraph = em.getEntityGraph("volledig");
+    EntityGraph<?> entityGraph = em.getEntityGraph("volledig");
     System.out.println("Entity Graph: " + entityGraph);
     return em.createQuery("select c from Cursist c where c.landVanHerkomst = :land", Cursist.class)
             .setParameter("land", land)
