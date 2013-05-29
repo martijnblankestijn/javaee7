@@ -1,12 +1,15 @@
 package nl.ordina.javaee7.batch;
 
 
+import org.junit.Before;
 import org.junit.Test;
 
 import javax.batch.operations.JobOperator;
 import javax.batch.runtime.BatchRuntime;
 import javax.batch.runtime.BatchStatus;
 import javax.batch.runtime.JobExecution;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,6 +17,7 @@ import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Properties;
 
 import static org.junit.Assert.assertEquals;
@@ -24,6 +28,13 @@ import static org.junit.Assert.assertEquals;
 public class InverterBatchPartitionedSkipTest extends AbstractBatchTest {
 
   private static final int AANTAL_GELDIGE_RECORDS = 14;
+
+  @Before
+  public void init() {
+    // Let eclipselink put tables in the database
+//    EntityManagerFactory emf = Persistence.createEntityManagerFactory();
+    Persistence.generateSchema("inverterPU", new HashMap());
+  }
 
   @Test
   public void testOngeldigeRecordsOvergeslagen() throws SQLException, IOException {
