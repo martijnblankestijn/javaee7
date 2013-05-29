@@ -18,7 +18,7 @@
             See url for latest build
             http://java.net/projects/websocket-spec/sources/source-code-repository/show/tags?rev=261
         -->
-        <websocket-api.version>1.0-rc5</websocket-api.version>
+        <websocket-api.version>1.0</websocket-api.version>
     </properties>
 
     <repositories>
@@ -65,6 +65,14 @@
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
         </plugins>
