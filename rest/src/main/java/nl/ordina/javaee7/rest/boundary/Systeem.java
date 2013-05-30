@@ -1,8 +1,11 @@
 package nl.ordina.javaee7.rest.boundary;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  *
  */
+@XmlRootElement
 public class Systeem {
   private long id;
   private String serialNumber;
