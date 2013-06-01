@@ -41,7 +41,7 @@ public class SystemResourceTest {
     System.out.println("PUT IT");
 
     assertEquals(Response.Status.OK.getStatusCode(), target.request().get().getStatus());
-
   }
+
 
 }

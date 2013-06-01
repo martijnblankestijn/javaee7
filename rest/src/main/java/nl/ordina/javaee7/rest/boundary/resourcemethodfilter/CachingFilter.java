@@ -12,32 +12,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * WARNING .... WORK in progress, absolutely toy-code that should never be used in production
+ */
 public class CachingFilter implements ContainerRequestFilter, ContainerResponseFilter {
   private ConcurrentHashMap<Object, Response> cache = new ConcurrentHashMap<>();
 
-  public CachingFilter() {
-    System.out.println("Constructor");
-  }
-
   @Override public void filter(ContainerRequestContext req) throws IOException {
-    System.out.println("ServiceCachingFilterL filterRequest");
-
-    URI uri = req.getUriInfo().getAbsolutePath();
-    Response response = cache.get(uri);
-    if (response != null) {
-      System.out.println("FOUND RESPONSE for uri " + uri + ".");
-      req.abortWith(response);
-    }
-
+    Response response = cache.get(req.getUriInfo().getAbsolutePath());
+    if (response != null) req.abortWith(response);
   }
 
   @Override
   public void filter(ContainerRequestContext req, ContainerResponseContext resp) throws IOException {
-    System.out.println("ServiceCachingFilterL filterResponse");
-
     URI uri = req.getUriInfo().getAbsolutePath();
     cache.putIfAbsent(uri, Response.ok(resp.getEntity()).build());
-    System.out.println("PUT IN CACHE with URI: " + uri + " for " + resp.getEntity());
 
     MultivaluedMap<String, String> stream = resp.getStringHeaders();
     System.out.println("Headers: ");
@@ -45,4 +34,8 @@ public class CachingFilter implements ContainerRequestFilter, ContainerResponseF
       System.out.println(s.getKey() + " " + s.getValue());
     }
   }
+  public CachingFilter() {
+	    System.out.println("Constructor");
+	  }
+
 }
