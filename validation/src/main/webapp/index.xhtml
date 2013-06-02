@@ -23,6 +23,18 @@
             <f:convertDateTime pattern="dd-MM-yyyy" />
         </h:outputText>
     </h:form>
+
+
+    <h2>Test voor EJB method validatie</h2>
+    <h:form>
+        <h:messages />
+        <h:commandButton action="#{cdiToEjbBridge.check(null)}" value="Check null"/>
+        <br/>
+        <h:commandButton action="#{cdiToEjbBridge.checkReturnAlwaysNull}" value="Check return null"/>
+        <br/>
+        <h:commandButton action="#{cdiToEjbBridge.check('hallo')}" value="Check param en return"/>
+    </h:form>
+
 </h:body>
 </html>
 

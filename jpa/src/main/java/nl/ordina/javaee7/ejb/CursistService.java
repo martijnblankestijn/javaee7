@@ -40,13 +40,13 @@ public class CursistService {
    org.apache.derby.client.am.SqlException: Column name 'EERSTE' appears in a statement without a FROM list.   * @return
    */
 public int callStoredProcedure2() {
-  StoredProcedureQuery storedProcedureQuery = em
+  StoredProcedureQuery sp = em
           .createNamedStoredProcedureQuery("plus")
-          .setParameter("EERSTE", 5)
-          .setParameter("TWEEDE", 8);
-  boolean resultaat = storedProcedureQuery.execute();
+  .setParameter("EERSTE", 5)
+  .setParameter("TWEEDE", 8);
+  boolean resultaat = sp.execute();
 
-  return (Integer) storedProcedureQuery.getOutputParameterValue("RESULTAAT");
+  return (Integer) sp.getOutputParameterValue("RESULTAAT");
 }
 
   public int callStoredProcedure() {

@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<job id="inverterBatch" xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="1.0">
+<job id="inverterBatch" version="1.0" restartable="true" parent="false" xmlns="http://xmlns.jcp.org/xml/ns/javaee" >
     <listeners>
-        <listener ref="GenericJobListener" />
+        <listener ref="GenericJobListener"/>
     </listeners>
 
     <step id="readFiles">
         <listeners>
-            <listener ref="SkipInvalidRecordProcessListener" />
-            <listener ref="LoggingItemProcessListener" />
-            <listener ref="StepErrorListener" />
+            <listener ref="SkipInvalidRecordProcessListener"/>
+            <listener ref="LoggingItemProcessListener"/>
+            <listener ref="StepErrorListener"/>
         </listeners>
         <chunk checkpoint-policy="item" item-count="1000" skip-limit="25">
             <reader ref="InverterDataReader">
                 <properties>
-                    <property name="inverterCsvFile" value="#{jobParameters['inverter-csv-file']}" />
+                    <property name="inverterCsvFile" value="#{jobParameters['inverter-csv-file']}"/>
                 </properties>
             </reader>
-            <processor ref="InverterItemProcessor" />
-            <writer ref="InverterDataWriter" />
+            <processor ref="InverterItemProcessor"/>
+            <writer ref="InverterDataWriter"/>
             <skippable-exception-classes>
-                <include class="nl.ordina.javaee7.batch.InvalidRecordException" />
+                <include class="nl.ordina.javaee7.batch.InvalidRecordException"/>
                 <exclude class="java.io.FileNotFoundException"/>
             </skippable-exception-classes>
         </chunk>
