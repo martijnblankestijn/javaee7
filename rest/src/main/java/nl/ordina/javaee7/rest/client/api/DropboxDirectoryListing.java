@@ -1,19 +1,12 @@
 package nl.ordina.javaee7.rest.client.api;
 
 import org.glassfish.jersey.filter.LoggingFilter;
-import sun.org.mozilla.javascript.json.JsonParser;
 
 import javax.json.*;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.Map;
-import java.util.Properties;
 import java.util.logging.Logger;
-
-import static nl.ordina.javaee7.rest.client.ParameterScanner.createOAuthHeader;
 
 /**
  *
