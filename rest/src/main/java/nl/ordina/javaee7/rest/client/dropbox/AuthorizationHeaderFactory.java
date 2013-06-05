@@ -15,8 +15,8 @@ public class AuthorizationHeaderFactory {
     Properties properties = readProperties("/dropbox.properties");
     Map<String, String> genericParameters = convertToMap(properties);
 
-    // returns something like:
-    // Authorization: OAuth oauth_signature="o2b4gl15yz5vdgu&z8ygnzlnrr6tljd",
+    // returns de Authorization header for OAuth (Dropbox):
+    // OAuth oauth_signature="o2b4gl15yz5vdgu&z8ygnzlnrr6tljd",
     // oauth_version="1.0",oauth_consumer_key="411mtiy1cb4e5ve",
     // oauth_signature_method="PLAINTEXT",oauth_token="kuiwssj7v9or4k0"
     return ParameterScanner.createOAuthHeader(genericParameters);
