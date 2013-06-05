@@ -83,6 +83,9 @@
         websocket.onopen = function(evt) {
             console.log('Connected');
         }
+        websocket.onerror = function(evt) {
+            alert("Error opgetreden: " + evt.message);
+        }
 
     }
 
