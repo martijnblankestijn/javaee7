@@ -48,6 +48,12 @@ public class DirectoryListing {
   }
 
 
+  /**
+   * <ul>
+   * <li><a href="https://www.dropbox.com/developers">Developers</a></li>
+   * <li><a href="https://www.dropbox.com/home/">Dropbox Home</a></li>
+   * </ul>
+   */
   public static void main(String[] args) throws IOException {
     DirectoryListing command = new DirectoryListing(createOAuthHeader());
     command.execute();

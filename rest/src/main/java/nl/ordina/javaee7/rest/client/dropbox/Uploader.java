@@ -21,20 +21,18 @@ public class Uploader {
   }
 
   private void execute() {
-    // And now something exciting
+    // And now something more exciting
     File f = getFile("/DukeOnSax.gif");
     FileInputStream fis = openFileInputStream(f);
-    final long length = f.length();
 
-    String PUT_FILE_URL = "https://api-content.dropbox.com/1/files_put/sandbox/{file}";
+    String url = "https://api-content.dropbox.com/1/files_put/sandbox/{file}";
 
     // BEGIN TO DELETE
     // No logging of binary file
-    String uploadResponse = ClientBuilder.newClient().target(PUT_FILE_URL)
+    String uploadResponse = ClientBuilder.newClient().target(url)
             .resolveTemplate("file", "DukeOnSax.gif")
             .request()
             .header("Authorization", oAuthHeader)
-            .header("Content-Length", length)
             .put(Entity.entity(fis, "image/gif"))
             .readEntity(String.class);
     System.out.println(uploadResponse);
@@ -58,6 +56,12 @@ public class Uploader {
     }
   }
 
+  /**
+   * <ul>
+   * <li><a href="https://www.dropbox.com/developers">Developers</a></li>
+   * <li><a href="https://www.dropbox.com/home/">Dropbox Home</a></li>
+   * </ul>
+   */
   public static void main(String[] args) {
     Uploader uploader = new Uploader(createOAuthHeader());
     uploader.execute();
