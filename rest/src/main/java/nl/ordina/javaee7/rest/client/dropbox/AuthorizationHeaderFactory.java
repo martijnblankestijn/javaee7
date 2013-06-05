@@ -1,4 +1,4 @@
-package nl.ordina.javaee7.rest.client.api;
+package nl.ordina.javaee7.rest.client.dropbox;
 
 import nl.ordina.javaee7.rest.client.ParameterScanner;
 
@@ -33,7 +33,7 @@ public class AuthorizationHeaderFactory {
   private static Properties readProperties(final String propertyFile) {
     final Properties properties = new Properties();
     try {
-      properties.load(DropboxDirectoryListing.class.getResourceAsStream(propertyFile));
+      properties.load(DirectoryListing.class.getResourceAsStream(propertyFile));
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

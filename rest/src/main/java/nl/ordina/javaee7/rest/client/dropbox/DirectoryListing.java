@@ -1,4 +1,4 @@
-package nl.ordina.javaee7.rest.client.api;
+package nl.ordina.javaee7.rest.client.dropbox;
 
 import org.glassfish.jersey.filter.LoggingFilter;
 
@@ -8,16 +8,16 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.logging.Logger;
 
-import static nl.ordina.javaee7.rest.client.api.AuthorizationHeaderFactory.createOAuthHeader;
+import static nl.ordina.javaee7.rest.client.dropbox.AuthorizationHeaderFactory.createOAuthHeader;
 
 /**
  *
  */
-public class DropboxDirectoryListing {
+public class DirectoryListing {
 
   private final String oAuthHeader;
 
-  public DropboxDirectoryListing(final String oAuthHeader) {
+  public DirectoryListing(final String oAuthHeader) {
     this.oAuthHeader = oAuthHeader;
   }
 
@@ -49,7 +49,7 @@ public class DropboxDirectoryListing {
 
 
   public static void main(String[] args) throws IOException {
-    DropboxDirectoryListing command = new DropboxDirectoryListing(createOAuthHeader());
+    DirectoryListing command = new DirectoryListing(createOAuthHeader());
     command.execute();
   }
 

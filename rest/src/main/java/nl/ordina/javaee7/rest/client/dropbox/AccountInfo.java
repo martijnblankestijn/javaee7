@@ -1,4 +1,4 @@
-package nl.ordina.javaee7.rest.client.api;
+package nl.ordina.javaee7.rest.client.dropbox;
 
 import org.glassfish.jersey.filter.LoggingFilter;
 
@@ -13,11 +13,11 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE;
 /**
  *
  */
-public class DropboxAccountInfo {
+public class AccountInfo {
   private static final String ACCOUNT_INFO_URL = "https://api.dropbox.com/1/account/info";
   private final String oAuthHeader;
 
-  public DropboxAccountInfo(final String oAuthHeader) {
+  public AccountInfo(final String oAuthHeader) {
     this.oAuthHeader = oAuthHeader;
   }
 
@@ -38,7 +38,7 @@ public class DropboxAccountInfo {
   }
 
   public static void main(String[] args) throws Exception {
-    DropboxAccountInfo lister = new DropboxAccountInfo(AuthorizationHeaderFactory.createOAuthHeader());
+    AccountInfo lister = new AccountInfo(AuthorizationHeaderFactory.createOAuthHeader());
     lister.showInfo();
   }
 }

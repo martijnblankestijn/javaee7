@@ -1,4 +1,4 @@
-package nl.ordina.javaee7.rest.client.api;
+package nl.ordina.javaee7.rest.client.dropbox;
 
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -8,15 +8,15 @@ import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-import static nl.ordina.javaee7.rest.client.api.AuthorizationHeaderFactory.createOAuthHeader;
+import static nl.ordina.javaee7.rest.client.dropbox.AuthorizationHeaderFactory.createOAuthHeader;
 
 /**
  *
  */
-public class DropboxUploader {
+public class Uploader {
   private final String oAuthHeader;
 
-  public DropboxUploader(final String oAuthHeader) {
+  public Uploader(final String oAuthHeader) {
     this.oAuthHeader = oAuthHeader;
   }
 
@@ -59,7 +59,7 @@ public class DropboxUploader {
   }
 
   public static void main(String[] args) {
-    DropboxUploader uploader = new DropboxUploader(createOAuthHeader());
+    Uploader uploader = new Uploader(createOAuthHeader());
     uploader.execute();
   }
 
