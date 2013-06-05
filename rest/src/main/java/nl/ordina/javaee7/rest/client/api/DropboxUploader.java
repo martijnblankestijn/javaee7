@@ -8,6 +8,8 @@ import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import static nl.ordina.javaee7.rest.client.api.AuthorizationHeaderFactory.createOAuthHeader;
+
 /**
  *
  */
@@ -48,7 +50,7 @@ public class DropboxUploader {
   }
 
   private File getFile(final String resourceLocation)  {
-    URL url = DropboxAccountInfo.class.getResource(resourceLocation);
+    URL url = getClass().getResource(resourceLocation);
     try {
       return new File(url.toURI());
     } catch (URISyntaxException e) {
@@ -57,7 +59,7 @@ public class DropboxUploader {
   }
 
   public static void main(String[] args) {
-    DropboxUploader uploader = new DropboxUploader(AuthorizationHeaderFactory.createOAuthHeader());
+    DropboxUploader uploader = new DropboxUploader(createOAuthHeader());
     uploader.execute();
   }
 
