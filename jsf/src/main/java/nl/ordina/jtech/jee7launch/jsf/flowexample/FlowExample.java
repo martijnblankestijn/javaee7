@@ -18,7 +18,7 @@ public class FlowExample implements Serializable {
 
         flowBuilder.id("", flowId);
         flowBuilder.viewNode(flowId, "/" + flowId + "/" + flowId + ".xhtml").markAsStartNode();
-        flowBuilder.returnNode("/index");
+        flowBuilder.returnNode("returnHome").fromOutcome("/index.xhtml");
 
         return flowBuilder.getFlow();
     }
