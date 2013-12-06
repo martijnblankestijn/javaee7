@@ -49,6 +49,7 @@ public class SimpleEndpoint {
 
   private void log(final String label, final Session client) {
     System.out.println(label + ",   open: " + client.getOpenSessions().size());
+
   }
 
 
