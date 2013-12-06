@@ -12,8 +12,6 @@ public class FlowExample implements Serializable {
 
     @Produces @FlowDefinition
     public Flow defineFlow(@FlowBuilderParameter FlowBuilder flowBuilder) {
-        System.err.println("Building the flow!");
-
         String flowId = "flowExample";
 
         flowBuilder.id("", flowId);
