@@ -16,36 +16,39 @@ public class JsonStreamingApiTest {
   public void showJsonStreamingAPIPresentation() {
     System.out.println("Show Streaming API output");
     StringWriter output = new StringWriter();
-    JsonGenerator writer = Json.createGenerator(output)
-            .writeStartObject()
-            .write("id", 5)
-            .write("serialNumber", "ABC1223")
-            .write("capacity", 125)
-            .writeEnd();
-    writer.flush();
-    writer.close();
+JsonGenerator writer = Json.createGenerator(output)
+        .writeStartObject()
+        .write("id", 5)
+        .write("serialNumber", "ABC1223")
+        .write("capacity", 125)
+        .writeEnd();
+writer.flush();
+writer.close();
     System.out.println("JSON: " + output.getBuffer());
 
 
     String input = output.getBuffer().toString();
 
+String key = null;  Systeem systeem = null;
 JsonParser parser = Json.createParser(new StringReader(input));
-String key = null;
-Systeem systeem = null;
 while (parser.hasNext()) {
   switch (parser.next()) {
     case START_OBJECT:   systeem = new Systeem(); break;
     case END_OBJECT:     System.out.println(systeem); return;
     case KEY_NAME:       key = parser.getString(); break;
     case VALUE_STRING:   systeem.setSerialNumber(parser.getString()); break;
-    case VALUE_NUMBER:
-      switch (key) {
-        case "capacity": systeem.setCapacity(parser.getLong());               break;
-        case "id":       systeem.setId(parser.getLong());                     break;
-        default:         throw new IllegalArgumentException("Do not compute");
-      } break;
+    case VALUE_NUMBER:   switch (key) {
+	        case "capacity": systeem.setCapacity(parser.getLong());       break;
+	        case "id":       systeem.setId(parser.getLong());             break;
+	        default:         throw new IllegalArgumentException("Error");
+	      } break;
+    case END_ARRAY: 	break;
+    case START_ARRAY: 	break;
+    case VALUE_FALSE:	break;
+    case VALUE_NULL:	break;
+    case VALUE_TRUE:	break;
   }}
-  }
+}
 
 
   @Test
