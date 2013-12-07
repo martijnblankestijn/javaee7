@@ -17,7 +17,7 @@ import static javax.persistence.ParameterMode.OUT;
     parameters = {
   @StoredProcedureParameter(name = "EERSTE", type = Integer.class, mode = IN),
   @StoredProcedureParameter(name = "TWEEDE", type = Integer.class, mode = IN),
-  @StoredProcedureParameter(name = "RESULTAAT", type = Integer.class, mode = OUT)
+  @StoredProcedureParameter(name = "RESULT", type = Integer.class, mode = OUT)
 })
 @Entity
 @Table(indexes = {

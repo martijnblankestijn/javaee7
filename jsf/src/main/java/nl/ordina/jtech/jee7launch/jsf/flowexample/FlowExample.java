@@ -8,16 +8,18 @@ import javax.faces.flow.builder.FlowDefinition;
 import java.io.Serializable;
 
 public class FlowExample implements Serializable {
-    private static final long serialVersionUID = 1l;
+  private static final long serialVersionUID = 1l;
 
-    @Produces @FlowDefinition
-    public Flow defineFlow(@FlowBuilderParameter FlowBuilder flowBuilder) {
-        String flowId = "flowExample";
+  @Produces
+  @FlowDefinition
+  public Flow defineFlow(@FlowBuilderParameter FlowBuilder flowBuilder) {
+    String flowId = "flowExample";
 
-        flowBuilder.id("", flowId);
-        flowBuilder.viewNode(flowId, "/" + flowId + "/" + flowId + ".xhtml").markAsStartNode();
-        flowBuilder.returnNode("returnHome").fromOutcome("/index.xhtml");
+    flowBuilder.id("", flowId);
+    flowBuilder.viewNode(flowId, "/" + flowId + "/" + flowId + ".xhtml")
+        .markAsStartNode();
+    flowBuilder.returnNode("returnHome").fromOutcome("/index.xhtml");
 
-        return flowBuilder.getFlow();
-    }
+    return flowBuilder.getFlow();
+  }
 }

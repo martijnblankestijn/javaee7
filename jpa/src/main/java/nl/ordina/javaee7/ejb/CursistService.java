@@ -26,14 +26,14 @@ public class CursistService {
     return em.createQuery("select c from Cursist c", Cursist.class).getResultList();
   }
 
-  public List<Cursist> getLand(Land land) {
-    EntityGraph<?> entityGraph = em.getEntityGraph("volledig");
-    System.out.println("Entity Graph: " + entityGraph);
-    return em.createQuery("select c from Cursist c where c.landVanHerkomst = :land", Cursist.class)
-            .setParameter("land", land)
-            .setHint("javax.persistence.loadgraph", "volledig")
-            .getResultList();
-  }
+public List<Cursist> getLand(Land land) {
+  EntityGraph<?> entityGraph = em.getEntityGraph("volledig");
+  System.out.println("Entity Graph: " + entityGraph);
+  return em.createQuery("select c from Cursist c where c.landVanHerkomst = :land", Cursist.class)
+          .setParameter("land", land)
+          .setHint("javax.persistence.loadgraph", "volledig")
+          .getResultList();
+}
 
   /**
    * Deze werkt niet, met foutmelding
@@ -46,7 +46,7 @@ public int callStoredProcedure2() {
   .setParameter("TWEEDE", 8);
   boolean resultaat = sp.execute();
 
-  return (Integer) sp.getOutputParameterValue("RESULTAAT");
+  return (Integer) sp.getOutputParameterValue("RESULT");
 }
 
   public int callStoredProcedure() {

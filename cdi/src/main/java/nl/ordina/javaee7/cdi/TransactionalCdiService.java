@@ -14,6 +14,7 @@ import static javax.transaction.Transactional.TxType.REQUIRED;
 @Transactional(value = REQUIRED,
         rollbackOn = IllegalArgumentException.class,
         dontRollbackOn = EntityNotFoundException.class)
+@Log
 public class TransactionalCdiService {
   @PersistenceContext
   EntityManager em;

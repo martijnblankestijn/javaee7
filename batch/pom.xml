@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <com.ibm.batch-runtime.version>1.0-b28</com.ibm.batch-runtime.version>
+        <com.ibm.batch-runtime.version>1.0</com.ibm.batch-runtime.version>
         <derby.version>10.1.1.0</derby.version>
     </properties>
 
