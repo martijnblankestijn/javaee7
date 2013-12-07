@@ -1,6 +1,5 @@
 package nl.ordina.javaee7.rest.boundary;
 
-import nl.ordina.javaee7.rest.boundary.resourcemethodfilter.Cached;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.*;
@@ -16,7 +15,6 @@ import static javax.ws.rs.core.Response.Status.NOT_FOUND;
  *
  */
 @Path("systemen") @ApplicationScoped
-@Cached
 public class SysteemResource {
 
   @GET @Path("{systeemId}") @Produces({APPLICATION_JSON, APPLICATION_XML})

@@ -3,20 +3,19 @@ package nl.ordina.javaee7.rest.boundary;
 
 import org.junit.Test;
 
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.SSLSession;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import static nl.ordina.javaee7.rest.boundary.EndpointInfo.CONTEXT_ROOT;
 import static org.junit.Assert.assertEquals;
 
 /**
  *
  */
 public class ClientApiTest {
-  private final static String ENDPOINT = "http://localhost:8080/rest/systemen/1";
+  private final static String ENDPOINT = CONTEXT_ROOT + "/systemen/1";
 
   @Test
   public void testResponse() {
