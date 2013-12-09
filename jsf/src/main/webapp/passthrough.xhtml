@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://java.sun.com/jsf/passthrough"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<head>
+<title>Pass Through attributes</title>
+</head>
+<h:body>
+	<h1>Passthrough attributes</h1>
+
+  <h:form>
+    <h:inputText value="#{bean.value}" p:placeholder="Enter text" />
+
+    <h:inputText value="#{bean.value}">
+      <f:passThroughAttribute name="placeholder" 
+		                      value="Enter text" />
+    </h:inputText>
+  </h:form>
+</h:body>
+</html>
+
